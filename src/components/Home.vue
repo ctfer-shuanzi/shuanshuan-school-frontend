@@ -129,7 +129,7 @@
       <div v-if="$route.path === '/home'" class="welcome-page">
         <div class="avatar-container">
           <!-- 欢迎头像 -->
-          <el-avatar :size="120" src="../assets/avatar2.png" />
+          <el-avatar :size="120" src="../assets/avatar3.jpg" />
           <h2>欢迎使用管理系统</h2>
           <p>请从左侧菜单选择功能</p>
         </div>
