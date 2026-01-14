@@ -7,7 +7,7 @@
       </el-header>
       <el-main>
         <div class="login-card"><!-- 登录卡片 -->
-          <el-form :model="loginForm" :rules="loginRules" ref="loginFormRef" class="login-form">
+          <el-form :model="loginForm" :rules="loginRules" ref="loginFormRef" class="login-form" @keydown.enter="handleLogin" >
             <div class="form-title">用户登录</div>
             <el-form-item prop="username">
               <el-input v-model="loginForm.username" placeholder="请输入用户名" prefix-icon="User"></el-input>
@@ -19,7 +19,7 @@
               <el-button type="primary" class="login-btn" @click="handleLogin" :disabled="loading">{{ loading ? '登录中...' : '登录' }}</el-button>
             </el-form-item>
           </el-form>
-          <p>还没有账号？<router-link to="/register">立即注册</router-link></p>
+          <p>还没账号？<router-link to="/register">立即注册</router-link></p>
         </div>
       </el-main>
       <el-footer>
@@ -68,19 +68,19 @@ const handleLogin = () =>{
       try {
         // 登录请求
         const response = await axios.post('http://localhost:8080/account/login',loginForm.value);
-        if(response.data.code === "200"){
+        if(response.data.code === 200){
           ElMessage.success(response.data.message);
           router.push('/home'); // 登录成功后跳转到主页面
-        }else if(response.data.code === "1001"){
+        }else if(response.data.code === 1001){
           ElMessage.error(response.data.message);// 用户不存在，跳转到注册页面
           router.push('/register');
-        }else if(response.data.code === "1002"){
+        }else if(response.data.code === 1002){
           ElMessage.error(response.data.message);// 用户名或密码错误
         }else{
-          ElMessage.error('登录异常');// 其他异常情况
+          ElMessage.error('登录失败');// 其他异常情况
         }
       } catch (error) {
-        ElMessage.error('登录失败，请稍后重试。');
+        ElMessage.error('登录失败，出现异常');
       } finally {
         loading.value = false;
       }
