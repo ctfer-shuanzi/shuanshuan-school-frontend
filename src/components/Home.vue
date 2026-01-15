@@ -10,7 +10,7 @@
         @select - 菜单选择事件，绑定handleSelect方法
         class - 自定义样式类
       -->
-      <el-menu 
+      <el-menu background-color="#FFE4E1"
         :default-active="activeIndex" 
         @select="handleSelect"
         class="el-menu-vertical"
@@ -33,15 +33,8 @@
             <el-icon><User /></el-icon>
             <span>账号管理</span>
           </template>
-          <el-menu-item-group title="增删">
-            <el-menu-item index="/account/add">增加账号记录</el-menu-item>
-            <el-menu-item index="/account/delete">删除账号记录</el-menu-item>
-          </el-menu-item-group>
           <el-menu-item-group title="查询">
-            <el-menu-item index="/account/query">查询账号信息</el-menu-item>
-          </el-menu-item-group>
-          <el-menu-item-group title="修改">
-            <el-menu-item index="/account/update">修改账号信息</el-menu-item>
+            <el-menu-item index="/account">查询账号信息</el-menu-item>
           </el-menu-item-group>
         </el-sub-menu>
 
@@ -51,16 +44,9 @@
             <el-icon><School /></el-icon>
             <span>学生管理</span>
           </template>
-          <el-menu-item-group title="增删">
-            <el-menu-item index="/student/add">增加学生记录</el-menu-item>
-            <el-menu-item index="/student/delete">删除学生记录</el-menu-item>
-          </el-menu-item-group>
           <el-menu-item-group title="查询">
-            <el-menu-item index="/student/query">查询学生信息</el-menu-item>
+            <el-menu-item index="/student">查询学生信息</el-menu-item>
           </el-menu-item-group>
-          <el-menu-item-group title="修改">
-            <el-menu-item index="/student/update">修改学生信息</el-menu-item>
-          </el-menu-item-group>  
         </el-sub-menu>
 
         <!-- 教师管理分组 -->
@@ -69,16 +55,9 @@
             <el-icon><Avatar /></el-icon>
             <span>教师管理</span>
           </template>
-          <el-menu-item-group title="增删">
-            <el-menu-item index="/teacher/add">增加教师记录</el-menu-item>
-            <el-menu-item index="/teacher/delete">删除教师记录</el-menu-item>
-          </el-menu-item-group>
           <el-menu-item-group title="查询">
-            <el-menu-item index="/teacher/query">查询教师信息</el-menu-item>
+            <el-menu-item index="/teacher">查询教师信息</el-menu-item>
           </el-menu-item-group>
-          <el-menu-item-group title="修改">
-            <el-menu-item index="/teacher/update">修改教师信息</el-menu-item>
-          </el-menu-item-group>  
         </el-sub-menu>
 
         <!-- 课程管理分组 -->
@@ -87,16 +66,9 @@
             <el-icon><Notebook /></el-icon>
             <span>课程管理</span>
           </template>
-          <el-menu-item-group title="增删">
-            <el-menu-item index="/course/add">增加课程记录</el-menu-item>
-            <el-menu-item index="/course/delete">删除课程记录</el-menu-item>
-          </el-menu-item-group>
           <el-menu-item-group title="查询">
-            <el-menu-item index="/course/query">查询课程信息</el-menu-item>
+            <el-menu-item index="/course">查询课程信息</el-menu-item>
           </el-menu-item-group>
-          <el-menu-item-group title="修改">
-            <el-menu-item index="/course/update">修改课程信息</el-menu-item>
-          </el-menu-item-group>  
         </el-sub-menu>
 
         <!-- 选课管理分组 -->
@@ -105,16 +77,9 @@
             <el-icon><List /></el-icon>
             <span>选课管理</span>
           </template>
-          <el-menu-item-group title="增删">
-            <el-menu-item index="/sc/add">增加选课记录</el-menu-item>
-            <el-menu-item index="/sc/delete">删除选课记录</el-menu-item>
-          </el-menu-item-group>
           <el-menu-item-group title="查询">
-            <el-menu-item index="/sc/query">查询选课信息</el-menu-item>
+            <el-menu-item index="/choose">查询选课信息</el-menu-item>
           </el-menu-item-group>
-          <el-menu-item-group title="修改">
-            <el-menu-item index="/sc/update">修改选课信息</el-menu-item>
-          </el-menu-item-group>  
         </el-sub-menu>
       </el-menu>
     </div>
@@ -129,8 +94,8 @@
       <div v-if="$route.path === '/home'" class="welcome-page">
         <div class="avatar-container">
           <!-- 欢迎头像 -->
-          <el-avatar :size="120" src="../assets/avatar3.jpg" />
-          <h2>欢迎使用管理系统</h2>
+          <el-avatar shape="square" :size="120" src="../assets/avatar3.jpg" />
+          <h2>欢迎使用栓栓教务系统</h2>
           <p>请从左侧菜单选择功能</p>
         </div>
       </div>
@@ -152,6 +117,8 @@ import {
   Notebook,   // 笔记本图标 - 用于课程管理
   List        // 列表图标 - 用于选课管理
 } from '@element-plus/icons-vue'
+import Register from './Register.vue'
+import Account from './memu/Account.vue'
 
 /*
  * 路由相关设置
@@ -196,8 +163,24 @@ const handleSelect = (index) => {
     // 直接返回，不执行后续的路由跳转逻辑
     return
   }
-  if(index === '/account/add'){
-    router.push('/account/add')
+  if(index === '/account'){
+    router.push('/account')// 跳转到账号管理页面
+    return 
+  }
+  if(index === '/student'){
+    router.push('/student')// 跳转到学生管理页面
+    return 
+  }
+  if(index === '/teacher'){
+    router.push('/teacher')// 跳转到教师管理页面
+    return 
+  }
+  if(index === '/course'){
+    router.push('/course')// 跳转到课程管理页面
+    return 
+  }
+  if(index === '/choose'){
+    router.push('/choose')// 跳转到选课管理页面
     return 
   }
   

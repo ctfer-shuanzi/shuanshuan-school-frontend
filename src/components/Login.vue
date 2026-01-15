@@ -71,10 +71,10 @@ const handleLogin = () =>{
         if(response.data.code === 200){
           ElMessage.success(response.data.message);
           router.push('/home'); // 登录成功后跳转到主页面
-        }else if(response.data.code === 1001){
+        }else if(response.data.code === 1000){
           ElMessage.error(response.data.message);// 用户不存在，跳转到注册页面
           router.push('/register');
-        }else if(response.data.code === 1002){
+        }else if(response.data.code === 1001){
           ElMessage.error(response.data.message);// 用户名或密码错误
         }else{
           ElMessage.error('登录失败');// 其他异常情况
